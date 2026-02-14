@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>মজা 😜</title>
+<style>
+body{
+ margin:0;
+ background:black;
+ font-family:Arial;
+ color:#00ffcc;
+ text-align:center;
+ overflow:hidden;
+}
+#bg{
+ position:fixed;
+ top:0; left:0;
+ width:100%; height:100%;
+ object-fit:cover;
+ z-index:-1;
+}
+#msg{
+ position:fixed;
+ bottom:15%;
+ width:100%;
+ font-size:26px;
+ font-weight:bold;
+ text-shadow:0 0 10px #00ffcc;
+}
+#timer{
+ position:fixed;
+ top:15px;
+ width:100%;
+ font-size:20px;
+}
+</style>
+</head>
+<body onclick="goFull()">
+
+<img id="bg" src="https://i.imgur.com/8Km9tLL.jpg">
+
+<div id="timer">সময় বাকি: 180s</div>
+<div id="msg">বন্ধু ধরছি 😁</div>
+
+<script>
+let t = 180; // 3 মিনিট
+const jokes=[
+"হাসবি না কাঁদবি? 😆",
+"ফোন ঠিকই আছে 😜",
+"বন্ধুদের বিশ্বাস করিস কেন 🤣",
+"এটা একটা মজা 😎"
+];
+let i=0;
+
+setInterval(()=>{
+ document.getElementById("msg").innerText = jokes[i];
+ i=(i+1)%jokes.length;
+},10000);
+
+const timer = setInterval(()=>{
+ t--;
+ document.getElementById("timer").innerText = "সময় বাকি: "+t+"s";
+ if(t<=0){
+   clearInterval(timer);
+   alert("প্র্যাঙ্ক শেষ 😄");
+   window.close();
+ }
+},1000);
+
+function goFull(){
+ if(document.documentElement.requestFullscreen){
+   document.documentElement.requestFullscreen();
+ }
+}
+
+// ব্যাক/ফরোয়ার্ড/হোম প্র্যাকটিস
+history.pushState(null,null,location.href);
+window.onpopstate = function(){
+ alert("ওহো! এত সহজে বাইরে যাবে না 😁");
+ history.pushState(null,null,location.href);
+}
+
+// উইন্ডো থেকে বের হবার চেষ্টা
+window.onblur = function(){
+ alert("দেখো! মনোযোগ দাও 😎");
+ window.focus();
+}
+</script>
+
+</body>
+</html>
